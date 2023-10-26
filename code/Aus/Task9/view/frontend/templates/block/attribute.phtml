@@ -1,0 +1,41 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Description
+ * @var $sizeGuideVm \Aus\Task9\ViewModel\SizeGuide
+ */
+?>
+<?php
+$_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+$_product = $block->getProduct();
+
+if (!$_product instanceof \Magento\Catalog\Model\Product) {
+    return;
+}
+
+$_call = $block->getAtCall();
+$_code = $block->getAtCode();
+$_attributeType = $block->getAtType();
+$sizeGuideVm = $block->getData('size_guide_vm');
+
+if ($_attributeType && $_attributeType == 'text') {
+    $_attributeValue = ($_helper->productAttribute($_product, $_product->$_call(), $_code))
+        ? $_product->getAttributeText($_code)
+        : '';
+} else {
+    $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
+}
+
+$cmsBlock = $sizeGuideVm->getBlockByIdentifier($_attributeValue);
+?>
+
+<?php if ($_attributeValue) :?>
+        <?= html_entity_decode($cmsBlock->getContent()); ?>
+<?php endif; ?>
