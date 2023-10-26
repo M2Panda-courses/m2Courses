@@ -1,0 +1,7 @@
+Ордер з атрибутом ерп статус доступний по запиту graphq
+
+GET https://magento.test/graphql
+
+{
+"query": "query { getOrderById(id: 1) { created_at grand_total id increment_id number order_date order_number status shipping_method shipping_address { firstname lastname street city region postcode country_code } billing_address { firstname lastname street city region postcode country_code } payment_methods { name type additional_data { name value } } erp_status } }"
+}
