@@ -1,0 +1,3 @@
+{
+"query": "query { productCmsBlockContent (id: 1) }"
+}
