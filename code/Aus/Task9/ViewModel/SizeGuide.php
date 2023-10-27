@@ -14,9 +14,9 @@ class SizeGuide implements ArgumentInterface
 
     /**
      * @param $identifier
-     * @return BlockInterface
+     * @return mixed
      */
-    public function getBlockByIdentifier($identifier): BlockInterface
+    public function getBlockByIdentifier($identifier): mixed
     {
         $f = $this->cmsBlockCollection->addFieldToFilter('identifier', $identifier)->getItems();
         return reset($f);
